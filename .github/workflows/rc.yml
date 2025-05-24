@@ -200,13 +200,6 @@ jobs:
         with:
           repository: apache/parquet-testing
           path: arrow/cpp/submodules/parquet-testing
-      - name: Set up Python
-        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
-        with:
-          cache: 'pip'
-          python-version: 3.12
-      - name: Install Archery
-        run: pip install -e arrow/dev/archery[all]
       - name: Install dependencies
         run: |
           # We want to use llvm@14 to avoid shared z3
@@ -262,6 +255,13 @@ jobs:
           brew uninstall protobuf
 
           brew bundle --file=Brewfile
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          cache: 'pip'
+          python-version: 3.12
+      - name: Install Archery
+        run: pip install -e arrow/dev/archery[all]
       - name: Prepare ccache
         run: |
           echo "CCACHE_DIR=${PWD}/ccache" >> ${GITHUB_ENV}
