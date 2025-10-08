@@ -106,6 +106,7 @@ cmake \
   -Dre2_SOURCE=BUNDLED \
   -GNinja
 cmake --build "${build_dir}/cpp" --target install
+cat "${install_dir}/lib/cmake/Arrow/ArrowConfig.cmake"
 github_actions_group_end
 
 if [ "${ARROW_RUN_TESTS:-}" == "ON" ]; then
